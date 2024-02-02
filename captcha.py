@@ -71,7 +71,7 @@ class Captcha:
         for i in range(random.randint(13, 16)):
             draw.line([(random.randint(-width//6, width//2),random.randint(-height//2, int(height*1.5))), (random.randint(width//3, int(width*1.2)),random.randint(-height//2, int(height*1.5)))], fill=(0,random.randint(230, 255)), width=random.randint(0, 2))
         counter:int = 0
-        step:int = width//len(text)
+        step:int = width//(len(text)-1)
         for i in range(0, width, step):
             font_size:int = height
             fontpath:str = random.choice(self._fonts)

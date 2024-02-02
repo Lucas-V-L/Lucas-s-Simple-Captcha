@@ -1,9 +1,12 @@
 from flask import Flask, render_template
 
+from captcha import Captcha
+
 app = Flask(__name__)
 
 @app.route("/")
-def hello_world():
-    return render_template("index.html", captcha="this is where the captcha will go!")
+def home():
+    demo = Captcha(7)
+    return render_template("index.html", captcha=demo.get_captcha())
 
 app.run(debug=True)

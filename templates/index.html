@@ -4,7 +4,7 @@ This is a test of the captcha!
 	<label for="text1">test field</label>
 	<input type="text" name="text1"/><br/>
 
-	{{ captcha }}
+	{{ captcha | safe }}
 
 	<input type="submit"/>
 </form>
