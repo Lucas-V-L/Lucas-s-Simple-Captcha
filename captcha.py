@@ -35,6 +35,7 @@ class Captcha:
         form:str = "<div>"
         form += f"<input type='hidden' name='__CAPTCHA_EPOCH' value='{epoch}'/>"
         form += f"<input type='hidden' name='__CAPTCHA_HASH' value='{loophash}'/>"
+        # TODO: image here, refer to -> https://stackoverflow.com/questions/33101935/convert-pil-image-to-byte-array
         form += "<input type='text' name='__CAPTCHA_TEXT'/>"
         form += "</div>"
 
@@ -58,7 +59,7 @@ class Captcha:
         else:
             return False
 
-    def generate_image(self, text:str, width:int=None, height:int=80) -> Image:
+    def generate_image(self, text:str, height:int=80, width:int=80) -> Image:
         if width == None:
             width = len(text) * height//2
         img:Image = Image.new(mode="LA", size=(width, height), color=(255,255))
@@ -98,14 +99,13 @@ class Captcha:
 
         img = img.filter(ImageFilter.BoxBlur(0.2))
 
-        img.show()
         return img
     
 # only runs if standalone, this is not intended to be a standalone program, so its just tests for development purposes
 if __name__ == "__main__":
-    captchatest:Captcha = Captcha(5)
-    for i in range(6):
-        captchatest.generate_image("HELLO")
+    captchatest:Captcha = Captcha(6)
+    for i in range(3):
+        captchatest.generate_image("QWERTYUIOPASDFGHJKLZXCVBNM").show()
     input()
     for i in range(3):
         html:str = captchatest.get_captcha()
